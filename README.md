@@ -1,11 +1,7 @@
 # 🚀 Fullstack Application — Express | Next.js | React Native | Prisma | PostgreSQL
 
 Proyek ini merupakan aplikasi fullstack modern yang dibangun dengan arsitektur terpisah menjadi tiga bagian utama: **API (backend)**, **Web (frontend)**, dan **Mobile (React Native)**.  
-📂 root/
-├── 📁 api/ # Backend (Express + TypeScript + Prisma)
-├── 📁 web/ # Frontend (Next.js 16 + TypeScript)
-├── 📁 mobile/ # Mobile App (React Native + Expo)
-└── README.md
+
 
 
 
@@ -13,7 +9,14 @@ Proyek ini merupakan aplikasi fullstack modern yang dibangun dengan arsitektur t
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone https://github.com/username/project-name.git
+
+📂 root/
+├── 📁 api/ # Backend (Express + TypeScript + Prisma)
+├── 📁 web/ # Frontend (Next.js 16 + TypeScript)
+├── 📁 mobile/ # Mobile App (React Native + Expo)
+└── README.md
+
+git clone https://github.com/megustaSzy/project-web-mobile.git
 cd project-name
 
 

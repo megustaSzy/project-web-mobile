@@ -77,6 +77,22 @@ export const userService = {
         if(!user) throw new Error("user tidak ditemukan");
 
         return prisma.tb_user.update({ where: { id }, data });
-    } 
+    },
+
+    async deleteUserById(id: number) {
+        const user = await prisma.tb_user.findUnique({
+            where: {
+                id
+            }
+        });
+
+        if(!user) throw new Error("id tidak ditemukan");
+
+        return prisma.tb_user.delete({
+            where: {
+                id
+            }
+        });
+    }
 
 }

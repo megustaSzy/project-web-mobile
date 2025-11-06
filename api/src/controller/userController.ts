@@ -111,5 +111,28 @@ export const userController = {
                 success: false
             })
         }
+    },
+
+    async deleteUser (req: Request, res: Response) {
+        try {
+            const id = Number(req.params.id);
+
+            if(isNaN(id)) return res.json({
+                message: "id tidak valid",
+                success: false
+            })
+
+            await userService.deleteUserById(id);
+
+            res.json({
+                message: "user berhasil dihapus",
+                success: true
+            })
+        } catch (error: any) {
+            res.json({
+                message: error.message,
+                success: false
+            })
+        }
     }
 }

@@ -1,5 +1,6 @@
 import { PrismaClient, Role } from "@prisma/client";
-import { error } from "console";
+import bcrypt from 'bcryptjs';
+
 
 const prisma = new PrismaClient();
 
@@ -41,11 +42,13 @@ export const userService = {
             throw new Error("email sudah digunakan")
         }
 
+        const hashedPassword = await bcrypt.hash(data.password, 10);
+
         return prisma.tb_user.create({
             data: {
                 name: data.name,
                 email: data.email,
-                password: data.password,
+                password: hashedPassword,
                 role: data.role || "User",
                 notelp: data.notelp || ""
             }
@@ -68,6 +71,10 @@ export const userService = {
     },
 
     async updatedUserById(id: number, data: UserData) {
+        if(data.password) {
+            data.password = await bcrypt.hash(data.password, 10)
+        }
+
         const user = await prisma.tb_user.findUnique({
             where: {
                 id

@@ -69,13 +69,47 @@ export const userController = {
 
             if(!email || !password) {
                 return res.json({
-                    message: ""
+                    message: "email dan password wajib diisi",
+                    success: false
                 })
             }
-        } catch (error) {
-            
+
+            const user = await userService.loginUser(email, password);
+
+            return res.json({
+                message: "Login Berhasil",
+                success: this
+            })
+        } catch (error: any) {
+            res.json({
+                message: error.message,
+                success: false  
+            })
         }
 
 
+    },
+
+    async updateUser (req: Request, res: Response) {
+        try {
+            const id = Number(req.params.id);
+
+            if (isNaN(id)) return res.json({
+                message: "id tidak valid",
+                success: false
+            })
+
+            const user = await userService.updatedUserById(id, req.body);
+
+            res.json({
+                user,
+                success: true
+            })
+        } catch (error: any) {
+            res.json({
+                message: error.message,
+                success: false
+            })
+        }
     }
 }

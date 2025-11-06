@@ -67,5 +67,16 @@ export const userService = {
         return user;
     },
 
-    
+    async updatedUserById(id: number, data: UserData) {
+        const user = await prisma.tb_user.findUnique({
+            where: {
+                id
+            }
+        });
+
+        if(!user) throw new Error("user tidak ditemukan");
+
+        return prisma.tb_user.update({ where: { id }, data });
+    } 
+
 }

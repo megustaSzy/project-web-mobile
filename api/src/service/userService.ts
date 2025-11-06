@@ -1,7 +1,5 @@
 import { PrismaClient, Role } from "@prisma/client";
 import bcrypt from 'bcryptjs';
-import { error } from "console";
-
 
 const prisma = new PrismaClient();
 
@@ -72,8 +70,6 @@ export const userService = {
         if(!isMatch) {
             throw new Error ("password salah")
         }
-
-        return user;
     },
 
     async updatedUserById(id: number, data: UserData) {

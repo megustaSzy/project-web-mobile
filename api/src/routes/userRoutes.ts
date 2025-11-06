@@ -7,5 +7,7 @@ router.get("/", userController.getAllUsers);
 
 router.get("/:id", userController.getUserById)
 
+router.post("/register", userController.register)
+
 
 export default router;

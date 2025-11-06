@@ -21,28 +21,61 @@ export const userController = {
         }
     },
 
-    async getUserById (req: Request, res: Response) {
+    async getUserById(req: Request, res: Response) {
         try {
-            
-            const id = Number(req.params.id)
-            const user = await userService.getUserById(id)
+            const id = Number(req.params.id);
 
-            if(!user) {
-                return res.json({
-                    message: "id tidak ditemukan",
-                    success: false
-                });
-            }
+            if (isNaN(id)) return res.json({ 
+                message: "ID tidak valid", 
+                success: false 
+            });
 
-            res.json(user)
+            const user = await userService.getUserById(id);
 
-        } catch (error) {
             res.json({ 
-                message: "Terjadi kesalahan server", 
+                user, 
+                success: true 
+            });
+        } catch (error: any) {
+            res.json({ 
+                message: error.message, 
                 success: false 
             });
         }
+    },
+
+    async register (req: Request, res: Response) {
+        try {
+            const user = await userService.registerUser(req.body);
+
+            res.json({
+                user,
+                success: true
+            });
+
+        } catch (error: any) {
+            res.json({
+                message: error.message,
+                success: false
+            });
+        }
+        
+    },
+
+    async login (req: Request, res: Response) {
+        try {
+            
+            const { email, password } = req.body;
+
+            if(!email || !password) {
+                return res.json({
+                    message: ""
+                })
+            }
+        } catch (error) {
+            
+        }
+
+
     }
-
-
 }

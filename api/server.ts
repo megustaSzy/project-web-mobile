@@ -1,8 +1,6 @@
 import app from "./src/index";
 
-
 // Load environment variables
-
 
 const PORT = process.env.PORT || 3001;
 

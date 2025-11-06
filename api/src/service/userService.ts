@@ -1,5 +1,8 @@
 import { PrismaClient, Role } from "@prisma/client";
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 const prisma = new PrismaClient();
 
@@ -21,6 +24,7 @@ export const userService = {
         });
     },
 
+    // get by id
     async getUserById(id: number) {
         return prisma.tb_user.findUnique({
             where: {
@@ -29,6 +33,7 @@ export const userService = {
         });
     },
 
+    // registrasi
     async registerUser(data: UserData) {
 
         const existingUser = await prisma.tb_user.findUnique({
@@ -43,7 +48,7 @@ export const userService = {
 
         const hashedPassword = await bcrypt.hash(data.password, 10);
 
-        return prisma.tb_user.create({
+        const user = await prisma.tb_user.create({
             data: {
                 name: data.name,
                 email: data.email,
@@ -52,8 +57,12 @@ export const userService = {
                 notelp: data.notelp || ""
             }
         });
+        return {
+            id: user.id, name: user.name, email: user.email, role: user.role
+        }
     },
 
+    // login
     async loginUser (email: string, password: string) {
 
         const user = await prisma.tb_user.findUnique({
@@ -70,8 +79,22 @@ export const userService = {
         if(!isMatch) {
             throw new Error ("password salah")
         }
+
+        const token = jwt.sign({
+            id: user.id, name: user.name, email: user.email, role: user.role},
+            JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        return {
+            user: {
+                id: user.id, name: user.name, email: user.email, role: user.role
+            }, token
+        }
+            
     },
 
+    // update user
     async updatedUserById(id: number, data: UserData) {
         if(data.password) {
             data.password = await bcrypt.hash(data.password, 10)
@@ -88,6 +111,7 @@ export const userService = {
         return prisma.tb_user.update({ where: { id }, data });
     },
 
+    // dekete
     async deleteUserById(id: number) {
         const user = await prisma.tb_user.findUnique({
             where: {

@@ -32,6 +32,13 @@ export const userController = {
 
             const user = await userService.getUserById(id);
 
+            if(!user) {
+                res.json({
+                    message: "user tidak ditemukan",
+                    success: false
+                })
+            }
+
             res.json({ 
                 user, 
                 success: true 
@@ -49,7 +56,7 @@ export const userController = {
             const user = await userService.registerUser(req.body);
 
             res.json({
-                user,
+                message: "berhasiil membuat akun",
                 success: true
             });
 
@@ -77,8 +84,7 @@ export const userController = {
             const user = await userService.loginUser(email, password);
 
             return res.json({
-                message: "Login Berhasil",
-                success: this
+                message: "Login Berhasil"
             })
         } catch (error: any) {
             res.json({

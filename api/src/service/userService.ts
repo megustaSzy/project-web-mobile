@@ -1,5 +1,6 @@
 import { PrismaClient, Role } from "@prisma/client";
 import bcrypt from 'bcryptjs';
+import { error } from "console";
 
 
 const prisma = new PrismaClient();
@@ -63,9 +64,14 @@ export const userService = {
             }
         });
 
-        if(!user) throw new Error ("email tidak ditemukan");
+        if(!user) {
+            throw new Error ("email tidak ditemukan")
+        }
 
-        if(user.password !== password) throw new Error("password salah");
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch) {
+            throw new Error ("password salah")
+        }
 
         return user;
     },

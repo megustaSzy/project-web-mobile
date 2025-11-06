@@ -11,4 +11,12 @@ export const userService = {
             }
         });
     },
+
+    async getUserById(id: number) {
+        return prisma.tb_user.findUnique({
+            where: {
+                id
+            }
+        });
+    },
 }

@@ -1,29 +1,31 @@
+// src/middleware/authMiddleware.ts
 import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken"; 
+import { PrismaClient } from "@prisma/client";
 
-import jwt from "jsonwebtoken";
+const prisma = new PrismaClient
 
-const JWT_SECRET = process.env.JWT_SECRET!;
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+    const token = req.headers.authorization?.split(" ")[1];
 
-export interface AuthRequest extends Request {
-    user?: any
-}
-
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
-
-    if(!authHeader || !authHeader.startsWith("Token ")) {
-        return res.json({
-            message: "token tidak ditemukan",
-            success: false
-        });
+    if (!token) {
+        return res.status(401).json({ message: "token tidak ditemukan", success: false });
     }
 
-    const token = authHeader.split(" ")[1];
-
     try {
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: number };
 
-        req.user = decoded;
+        const user = await prisma.tb_user.findUnique({
+            where: { id: decoded.userId },
+            select: { id: true, email: true, name: true, role: true }
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: "user tidak ditemukan", success: false });
+        }
+
+        (req as any).user = user; 
+
         next();
     } catch (error) {
         return res.json({
@@ -31,5 +33,4 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
             success: false
         });
     }
-}
-
+};

@@ -48,7 +48,7 @@ export const userService = {
 
         const hashedPassword = await bcrypt.hash(data.password, 10);
 
-        const user = await prisma.tb_user.create({
+        return prisma.tb_user.create({
             data: {
                 name: data.name,
                 email: data.email,
@@ -57,9 +57,6 @@ export const userService = {
                 notelp: data.notelp || ""
             }
         });
-        return {
-            id: user.id, name: user.name, email: user.email, role: user.role
-        }
     },
 
     // login
@@ -80,17 +77,17 @@ export const userService = {
             throw new Error ("password salah")
         }
 
-        const token = jwt.sign({
-            id: user.id, name: user.name, email: user.email, role: user.role},
+        // generate token
+        const token = jwt.sign(
+            { userId: user.id },
             JWT_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: "7d" }
         );
 
-        return {
-            user: {
-                id: user.id, name: user.name, email: user.email, role: user.role
-            }, token
-        }
+        // jangan kirim password ke frontend
+        const { password: _, ...safeUser } = user;
+
+        return { user: safeUser, token };
             
     },
 

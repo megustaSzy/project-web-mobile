@@ -53,7 +53,7 @@ export const userController = {
 
     async register (req: Request, res: Response) {
         try {
-            const user = await userService.registerUser(req.body);
+            await userService.registerUser(req.body);
 
             res.json({
                 message: "berhasiil membuat akun",
@@ -143,5 +143,13 @@ export const userController = {
                 success: false
             })
         }
+    },
+
+    async getProfile (req: Request, res: Response) {
+        const currentUser = (req as any).user;
+        res.json({
+            user: currentUser,
+            success: true
+        })
     }
 }

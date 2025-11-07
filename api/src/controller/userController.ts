@@ -53,7 +53,7 @@ export const userController = {
 
     async register (req: Request, res: Response) {
         try {
-            const user = await userService.registerUser(req.body);
+            await userService.registerUser(req.body);
 
             res.json({
                 message: "berhasiil membuat akun",
@@ -69,32 +69,34 @@ export const userController = {
         
     },
 
-    async login (req: Request, res: Response) {
-        try {
-            
-            const { email, password } = req.body;
+    async login(req: Request, res: Response) {
+    try {
+        const { email, password } = req.body;
 
-            if(!email || !password) {
-                return res.json({
-                    message: "email dan password wajib diisi",
-                    success: false
-                })
-            }
-
-            const user = await userService.loginUser(email, password);
-
-            return res.json({
-                message: "Login Berhasil"
-            })
-        } catch (error: any) {
-            res.json({
-                message: error.message,
-                success: false  
-            })
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "email dan password wajib diisi",
+                success: false
+            });
         }
 
+        const { user, token } = await userService.loginUser(email, password);
 
+        return res.status(200).json({
+            message: "Login Berhasil",
+            success: true,
+            user,
+            token
+        });
+
+    } catch (error: any) {
+        return res.status(401).json({
+            message: error.message,
+            success: false,
+        });
+    }
     },
+
 
     async updateUser (req: Request, res: Response) {
         try {
@@ -140,5 +142,14 @@ export const userController = {
                 success: false
             })
         }
+    },
+
+    async getProfile (req: Request, res: Response) {
+        const currentUser = (req as any).user;
+        res.json({
+            user: currentUser,
+            message: "Login Berhasil",
+            success: true
+        })
     }
 }

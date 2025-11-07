@@ -81,10 +81,13 @@ export const userController = {
                 })
             }
 
-            const user = await userService.loginUser(email, password);
+            const { user, token } = await userService.loginUser(email, password);
 
             return res.json({
-                message: "Login Berhasil"
+                message: "Login Berhasil",
+                success: true,
+                user,
+                token
             })
         } catch (error: any) {
             res.json({

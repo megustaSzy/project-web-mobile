@@ -1,28 +1,32 @@
 import { Router } from "express";
 import { userController } from "../controller/userController";
 import { authMiddleware } from "../middleware/authMiddleware";
-import { authorizeRoles } from "../middleware/roleMiddleware";
+import { authorizeRoles } from "../middleware/roleMiddleware"; // fungsi middleware cek role
 import { asyncHandler } from "../middleware/asyncHandler";
 
 const router = Router();
 
+// REGISTER & LOGIN (public)
+router.post("/register", asyncHandler(userController.register));
+router.post("/login", asyncHandler(userController.login));
 
-//hanya admin yg bisa lihat user
-router.get("/", authMiddleware, authorizeRoles("Admin"), asyncHandler(userController.getAllUsers));
+// PROFILE (protected)
+router.get("/profile", authMiddleware, asyncHandler(userController.getProfile));
 
+// GET all users (Admin only)
+router.get("/", authMiddleware, authorizeRoles("Admin"), asyncHandler(userController.getAllUsers)
+);
 
-// register & login (tidak butuh auth)
-router.post("/register", userController.register);
-router.post("/login", userController.login);
+// GET user by ID (Admin or self)
+router.get("/:id", authMiddleware, asyncHandler(userController.getUserById) // controller harus cek self vs Admin
+);
 
-//user bisa lihat profile
-router.get("/profile", authMiddleware, userController.getProfile);
+// UPDATE user by ID (Admin or self)
+router.put("/:id", authMiddleware, asyncHandler(userController.updateUser)
+);
 
-// GET, UPDATE, and DELETE by ID
-router.get("/:id", authMiddleware, authorizeRoles("Admin"), asyncHandler(userController.getUserById));
-
-router.put("/:id", authMiddleware, asyncHandler(userController.updateUser));
-router.delete("/:id", authMiddleware, authorizeRoles("Admin"), asyncHandler(userController.deleteUser));
-
+// DELETE user by ID (Admin only)
+router.delete("/:id",authMiddleware, authorizeRoles("Admin"), asyncHandler(userController.deleteUser)
+);
 
 export default router;

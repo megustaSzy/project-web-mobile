@@ -60,35 +60,34 @@ export const userService = {
     },
 
     // login
-    async loginUser (email: string, password: string) {
+    async loginUser(email: string, password: string) {
 
-        const user = await prisma.tb_user.findUnique({
-            where: {
-                email
-            }
-        });
+    const user = await prisma.tb_user.findUnique({
+        where: { email }
+    });
 
-        if(!user) {
-            throw new Error ("email tidak ditemukan")
-        }
+    if (!user) {
+        throw new Error("email tidak ditemukan");
+    }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch) {
-            throw new Error ("password salah")
-        }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        throw new Error("password salah");
+    }
 
-        // generate token
-        const token = jwt.sign(
-            { userId: user.id },
-            JWT_SECRET,
-            { expiresIn: "7d" }
-        );
+    const token = jwt.sign(
+        {
+            id: user.id,
+            email: user.email,
+            role: user.role,
+        },
+        process.env.JWT_SECRET!,
+        { expiresIn: "7d" }
+    );
 
-        // jangan kirim password ke frontend
-        const { password: _, ...safeUser } = user;
+    const { password: _, ...safeUser } = user;
 
-        return { user: safeUser, token };
-            
+    return { user: safeUser, token };
     },
 
     // update user

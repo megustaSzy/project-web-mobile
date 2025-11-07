@@ -74,7 +74,7 @@ export const userController = {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({
+            return res.json({
                 message: "email dan password wajib diisi",
                 success: false
             });
@@ -82,7 +82,7 @@ export const userController = {
 
         const { user, token } = await userService.loginUser(email, password);
 
-        return res.status(200).json({
+        return res.json({
             message: "Login Berhasil",
             success: true,
             user,
@@ -90,7 +90,7 @@ export const userController = {
         });
 
     } catch (error: any) {
-        return res.status(401).json({
+        return res.json({
             message: error.message,
             success: false,
         });

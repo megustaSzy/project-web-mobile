@@ -1,10 +1,8 @@
-import { PrismaClient, Role } from "@prisma/client";
+import prisma from "../lib/prisma";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET!;
-
-const prisma = new PrismaClient();
 
 interface UserData {
     name: string,

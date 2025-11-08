@@ -1,14 +1,11 @@
 import { Router } from "express";
-import { userController } from "../controller/userController";
+import { userController } from "../controllers/userController";
 import { authMiddleware } from "../middleware/authMiddleware";
 import { authorizeRoles } from "../middleware/roleMiddleware"; // fungsi middleware cek role
 import { asyncHandler } from "../middleware/asyncHandler";
 
 const router = Router();
 
-// REGISTER & LOGIN (public)
-router.post("/register", asyncHandler(userController.register));
-router.post("/login", asyncHandler(userController.login));
 
 // PROFILE (protected)
 router.get("/profile", authMiddleware, asyncHandler(userController.getProfile));

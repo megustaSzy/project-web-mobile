@@ -7,14 +7,14 @@ export const authorizeRoles = (...allowedRoles: string[]) => {
         const user = (req as any).user;
 
         if (!user) {
-            return res.json({
+            return res.status(401).json({
                 message: "Unauthorized",
                 success: false,
             });
         }
 
         if (!allowedRoles.includes(user.role)) {
-            return res.json({
+            return res.status(403).json({
                 message: "role tidak memiliki akses",
                 success: false,
             });

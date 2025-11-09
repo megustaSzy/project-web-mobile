@@ -12,8 +12,7 @@ router.get("/profile", authMiddleware, asyncHandler(userController.getProfile));
 // GET all users (Admin only)
 router.get("/", authMiddleware, authorizeRoles("Admin"), asyncHandler(userController.getAllUsers));
 
-router.get("/:id", authMiddleware, asyncHandler(userController.getUserById) 
-);
+router.get("/:id", authMiddleware, asyncHandler(userController.getUserById));
 
 router.put("/:id", authMiddleware, asyncHandler(userController.updateUser));
 

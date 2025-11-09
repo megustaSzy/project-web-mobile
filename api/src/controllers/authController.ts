@@ -30,7 +30,7 @@ export const authController = {
                 message: "login berhasil",
                 success: true,
                 user,
-                token,   // token dikirim via response
+                token,
             });
 
         } catch (error: any) {

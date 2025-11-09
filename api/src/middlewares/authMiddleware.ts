@@ -1,22 +1,22 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma";
+import { createError } from "../utils/createError";
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(" ")[1];
+    const bearerToken = req.headers.authorization;
 
-    if (!token) {
+    if (!bearerToken || !bearerToken.startsWith("Bearer ")) {
         return res.status(401).json({
-            message: "Token tidak ditemukan",
+            message: "token tidak ditemukan",
             success: false,
         });
     }
 
+    const token = bearerToken.split(" ")[1];
+
     try {
-        const decoded = jwt.verify(
-            token,
-            process.env.JWT_SECRET!
-        ) as { id: number };
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: number };
 
         const user = await prisma.tb_user.findUnique({
             where: { id: decoded.id },
@@ -24,19 +24,18 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         });
 
         if (!user) {
-            return res.status(404).json({
-                message: "User tidak ditemukan",
+            return res.status(401).json({
+                message: "user tidak ditemukan",
                 success: false,
             });
         }
 
         (req as any).user = user;
-
         next();
 
-    } catch (error) {
+    } catch (err) {
         return res.status(403).json({
-            message: "Token tidak valid",
+            message: "token tidak valid atau expired",
             success: false,
         });
     }

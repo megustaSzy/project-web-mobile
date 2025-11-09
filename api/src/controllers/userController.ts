@@ -1,115 +1,76 @@
-import { userService } from "../services/userService";
 import { Request, Response } from "express";
+import { userService } from "../services/userService";
+import { createError } from "../utils/createError";
 
 export const userController = {
-  // GET all users (Admin only)
+
   async getAllUsers(req: Request, res: Response) {
 
     const users = await userService.getAllUsers();
 
-    res.status(200).json({
-      users,
-      success: true
-    });
+    return res.status(200).json({ 
+      success: true, 
+      users });
   },
 
-  // GET user by ID
   async getUserById(req: Request, res: Response) {
 
     const id = Number(req.params.id);
 
-    if (isNaN(id)) {
-
-      return res.status(400).json({
-        message: "ID tidak valid",
-        success: false
-
-      });
-    }
+    if (isNaN(id)) createError("id tidak valid", 400);
 
     const user = await userService.getUserById(id);
-    
-    if (!user) {
 
-      return res.status(404).json({
-        message: "user tidak ditemukan",
-        success: false
-      });
-    }
+    if (!user) createError("user tidak ditemukan", 404);
 
-    res.status(200).json({
-      user,
-      success: true
-    });
+    return res.status(200).json({ success: true, user });
   },
-  
-  // UPDATE user by ID
+
   async updateUser(req: Request, res: Response) {
 
     const idUpdate = Number(req.params.id);
 
-    if (isNaN(idUpdate)) {
-      return res.status(400).json({
-        message: "id tidak valid",
-        success: false
-      });
-    }
+    if (isNaN(idUpdate)) createError("id tidak valid", 400);
 
     const currentUser = (req as any).user;
 
-    if(currentUser.role !== "Admin" && currentUser.id !== idUpdate) {
-        return res.status(403).json({
-            message: "akses ditolak",
-            success: false
-        });
+    if (currentUser.role !== "Admin" && currentUser.id !== idUpdate) {
+      createError("akses ditolak", 403);
     }
 
     const updatedUser = await userService.updatedUserById(idUpdate, req.body);
 
-    res.status(200).json({
-        message: "user berhasil diperbarui",
-        success: true,
-        user: updatedUser
+    return res.status(200).json({
+      success: true,
+      message: "user berhasil diperbarui",
+      user: updatedUser,
     });
   },
 
-  // DELETE user by ID
   async deleteUser(req: Request, res: Response) {
 
     const idDelete = Number(req.params.id);
 
-    if (isNaN(idDelete)) {
-      return res.status(400).json({
-        message: "id tidak valid",
-        success: false
-      });
-    }
+    if (isNaN(idDelete)) createError("id tidak valid", 400);
 
     const currentUser = (req as any).user;
 
-    if(currentUser.role !== "Admin") {
-        return res.status(403).json({
-            message: "akses ditolak",
-            success: false
-        });
-    }
+    if (currentUser.role !== "Admin") createError("akses ditolak", 403);
 
     await userService.deleteUserById(idDelete);
 
-    res.status(200).json({
+    return res.status(200).json({
+      success: true,
       message: "user berhasil dihapus",
-      success: true
     });
   },
 
-  // GET PROFILE (protected route)
   async getProfile(req: Request, res: Response) {
 
     const currentUser = (req as any).user;
 
-    res.status(200).json({
-      user: currentUser,
-      success: true
-    });
+    return res.status(200).json({ 
+      success: true, 
+      user: currentUser });
   }
 };

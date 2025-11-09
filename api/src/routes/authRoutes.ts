@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { asyncHandler } from "../middleware/asyncHandler";
+import { asyncHandler } from "../middlewares/asyncHandler";
 import { authController } from "../controllers/authController";
 
 const router = Router();

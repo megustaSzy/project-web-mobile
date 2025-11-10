@@ -9,7 +9,6 @@ const images = ["/images/hero1.jpg", "/images/hero2.jpg", "/images/hero3.jpg"];
 export default function Hero() {
   const [current, setCurrent] = useState(0);
 
-  // Auto-slide setiap 5 detik
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -18,7 +17,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full h-[90vh] flex flex-col justify-end overflow-hidden">
+    <section className="relative w-full h-[90vh] flex flex-col justify-end overflow-visible">
       {/* Background Slider */}
       <div className="absolute inset-0">
         <AnimatePresence>
@@ -75,59 +74,76 @@ export default function Hero() {
           {images.map((_, index) => (
             <span
               key={index}
-              className={`w-3 h-3 rounded-full ${
-                current === index ? "bg-white" : "bg-white/40"
-              }`}
+              className={`w-3 h-3 rounded-full ${current === index ? "bg-white" : "bg-white/40"}`}
             />
           ))}
         </div>
       </div>
 
-      {/* Search Box */}
-      <div className="relative z-20 w-full max-w-6xl mx-auto -mb-12 md:-mb-16 px-4">
-        <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-wrap justify-between items-center gap-4">
-          {/* Lokasi */}
-          <div className="flex items-center gap-2 flex-1 min-w-[220px]">
-            <MapPin className="text-blue-600" />
-            <div>
-              <label className="text-gray-500 text-sm">Lokasi Kamu</label>
-              <p className="font-medium">Kota Bandar Lampung, Lampung</p>
-            </div>
-          </div>
-
-          {/* Tanggal */}
-          <div className="flex items-center gap-2 flex-1 min-w-[180px]">
-            <Calendar className="text-blue-600" />
-            <div>
-              <label className="text-gray-500 text-sm">Tanggal</label>
-              <p className="font-medium">Rab, 5 Nov 2025</p>
-            </div>
-          </div>
-
-          {/* Waktu */}
-          <div className="flex items-center gap-2 flex-1 min-w-[150px]">
-            <Clock className="text-blue-600" />
-            <div>
-              <label className="text-gray-500 text-sm">Waktu</label>
-              <p className="font-medium">07.00 - 16.00</p>
-            </div>
-          </div>
-
-          {/* Jumlah Tiket */}
-          <div className="flex items-center gap-2 flex-1 min-w-[120px]">
-            <Users className="text-blue-600" />
-            <div>
-              <label className="text-gray-500 text-sm">Jumlah Tiket</label>
-              <p className="font-medium">4 Orang</p>
-            </div>
-          </div>
-
-          {/* Tombol Search */}
-          <button className="bg-blue-600 hover:bg-blue-700 transition-all text-white py-3 px-8 rounded-xl flex items-center gap-2">
-            <Search size={18} /> Search
-          </button>
+     {/* Search Box (versi interaktif & rapi) */}
+<div className="relative z-20 w-full max-w-6xl mx-auto -mb-12 md:-mb-16 px-4">
+  <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-center">
+      {/* Lokasi */}
+      <button className="group flex items-center gap-3 min-w-0 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
+        <MapPin className="text-blue-600 flex-shrink-0" />
+        <div className="min-w-0">
+          <label className="text-gray-500 text-xs md:text-sm block">
+            Lokasi
+          </label>
+          <p className="font-medium truncate group-hover:text-blue-600">
+            Kalianda
+          </p>
         </div>
-      </div>
+      </button>
+
+      {/* Tanggal */}
+      <button className="group flex items-center gap-3 min-w-0 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
+        <Calendar className="text-blue-600 flex-shrink-0" />
+        <div className="min-w-0">
+          <label className="text-gray-500 text-xs md:text-sm block">
+            Tanggal
+          </label>
+          <p className="font-medium truncate group-hover:text-blue-600">
+            Rab, 5 Nov 2025
+          </p>
+        </div>
+      </button>
+
+      {/* Waktu */}
+      <button className="group flex items-center gap-3 min-w-0 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
+        <Clock className="text-blue-600 flex-shrink-0" />
+        <div className="min-w-0">
+          <label className="text-gray-500 text-xs md:text-sm block">
+            Waktu
+          </label>
+          <p className="font-medium truncate group-hover:text-blue-600">
+            07.00 - 16.00
+          </p>
+        </div>
+      </button>
+
+      {/* Jumlah Tiket */}
+      <button className="group flex items-center gap-3 min-w-0 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
+        <Users className="text-blue-600 flex-shrink-0" />
+        <div className="min-w-0">
+          <label className="text-gray-500 text-xs md:text-sm block">
+            Jumlah Tiket
+          </label>
+          <p className="font-medium truncate group-hover:text-blue-600">
+            4 Orang
+          </p>
+        </div>
+      </button>
+
+      {/* Tombol Search */}
+      <button className="bg-blue-600 hover:bg-blue-700 transition-all text-white py-3 px-6 rounded-xl flex items-center justify-center gap-2 whitespace-nowrap w-full">
+        <Search size={18} /> Search
+      </button>
+    </div>
+  </div>
+</div>
+
     </section>
   );
 }

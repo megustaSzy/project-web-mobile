@@ -2,6 +2,7 @@ import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
 import SearchCard from "./components/SearchCard";
 import Footer from "./components/Footer";
+import Destination from "./components/Destination";
 
 export default function Home() {
   return (
@@ -12,6 +13,10 @@ export default function Home() {
       {/* Hero Section */}
       <section>
         <Hero />
+      </section>
+
+      <section>
+        <Destination />
       </section>
 
       {/* Search Card */}

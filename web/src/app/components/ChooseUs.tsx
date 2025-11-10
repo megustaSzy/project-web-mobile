@@ -7,7 +7,7 @@ export default function ChooseUs() {
         {/* Gambar kiri */}
         <div className="flex justify-center">
           <img
-            src="/images/liburan.png"
+            src="/images/5.png"
             alt="Liburan"
             className="max-w-md w-full h-auto drop-shadow-xl"
           />
@@ -27,22 +27,22 @@ export default function ChooseUs() {
           <div className="space-y-4">
             {[
               {
-                img: "/images/icon1.png",
+                img: "/images/1.png",
                 value: "100+",
                 desc: "Perjalanan — Beri rating perjalananmu dan bantu wisatawan lain",
               },
               {
-                img: "/images/icon2.png",
+                img: "/images/2.png",
                 value: "99+",
                 desc: "Pengalaman — Bagikan pengalamanmu dan bantu wisatawan lain",
               },
               {
-                img: "/images/icon3.png",
+                img: "/images/3.png",
                 value: "100+",
                 desc: "Bahagia — Sebarkan momen bahagiamu bersama wisatawan",
               },
               {
-                img: "/images/icon4.png",
+                img: "/images/4.png",
                 value: "89%",
                 desc: "Rating — Tunjukkan rating bahagiamu dari pengalaman seru",
               },

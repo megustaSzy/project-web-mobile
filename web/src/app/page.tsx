@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 // import SearchCard from "./components/SearchCard";
 import Footer from "./components/Footer";
 import Destination from "./components/Destination";
+import ChooseUs from "./components/ChooseUs";
 
 export default function Home() {
   return (
@@ -17,6 +18,10 @@ export default function Home() {
 
       <section>
         <Destination />
+      </section>
+
+       <section>
+        <ChooseUs />
       </section>
 
       {/* Search Card */}

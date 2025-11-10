@@ -10,7 +10,7 @@ export default function NavBar() {
     <header className="sticky top-0 z-50 bg-white/30 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <div className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="LamiGo" width={40} height={40} />
+          <Image src="/images/logo.png" alt="LamiGo" width={40} height={40} />
           <span className="font-semibold text-lg">LamiGo</span>
         </div>
 

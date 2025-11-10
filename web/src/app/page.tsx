@@ -1,6 +1,6 @@
 import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
-import SearchCard from "./components/SearchCard";
+// import SearchCard from "./components/SearchCard";
 import Footer from "./components/Footer";
 import Destination from "./components/Destination";
 import ChooseUs from "./components/ChooseUs";
@@ -26,7 +26,7 @@ export default function Home() {
 
       {/* Search Card */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20">
-        <SearchCard />
+        {/* <SearchCard /> */}
       </section>
 
       {/* Footer */}

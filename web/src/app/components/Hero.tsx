@@ -83,61 +83,6 @@ export default function Hero() {
         </div>
       </div>
 
-{/* Search Box (mengambang di bawah hero) */}
-<div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full px-4">
-  <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6 max-w-6xl mx-auto">
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-      {/* Lokasi */}
-      <button className="group flex items-center gap-3 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
-        <MapPin className="text-blue-600 flex-shrink-0" />
-        <div className="min-w-0">
-          <label className="text-gray-500 text-xs md:text-sm">Lokasi</label>
-          <p className="font-medium truncate group-hover:text-blue-600">
-            Kota Bandar 
-          </p>
-        </div>
-      </button>
-
-      {/* Tanggal */}
-      <button className="group flex items-center gap-3 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
-        <Calendar className="text-blue-600 flex-shrink-0" />
-        <div className="min-w-0">
-          <label className="text-gray-500 text-xs md:text-sm">Tanggal</label>
-          <p className="font-medium truncate group-hover:text-blue-600">
-            Rab, 5 Nov 2025
-          </p>
-        </div>
-      </button>
-
-      {/* Waktu */}
-      <button className="group flex items-center gap-3 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
-        <Clock className="text-blue-600 flex-shrink-0" />
-        <div className="min-w-0">
-          <label className="text-gray-500 text-xs md:text-sm">Waktu</label>
-          <p className="font-medium truncate group-hover:text-blue-600">
-            07.00 - 16.00
-          </p>
-        </div>
-      </button>
-
-      {/* Jumlah Tiket */}
-      <button className="group flex items-center gap-3 border border-gray-200 rounded-xl px-4 py-3 hover:border-blue-500 transition-all text-left w-full">
-        <Users className="text-blue-600 flex-shrink-0" />
-        <div className="min-w-0">
-          <label className="text-gray-500 text-xs md:text-sm">Jumlah Tiket</label>
-          <p className="font-medium truncate group-hover:text-blue-600">
-            4 Orang
-          </p>
-        </div>
-      </button>
-
-      {/* Tombol Search */}
-      <button className="bg-blue-600 hover:bg-blue-700 transition-all text-white py-3 px-6 rounded-xl flex items-center justify-center gap-2 whitespace-nowrap w-full h-full">
-        <Search size={18} /> Search
-      </button>
-    </div>
-  </div>
-</div>
       {/* Hanya satu SearchCard di sini */}
       <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 w-full px-4 z-20">
         <SearchCard />

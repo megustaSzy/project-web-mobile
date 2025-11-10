@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { ReactNode } from "react";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import "./globals.css";
 
 
@@ -34,17 +35,19 @@ import "./globals.css";
 //   );
 // }
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata = {
   title: "LamiGo - Jelajah Alam Lampung",
-  description: "Temukan destinasi terbaik di Lampung bersama LamiGo!",
+  description: "Temukan destinasi terbaik dan pesan tiket dengan mudah",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="id">
-      <body className={inter.className}>{children}</body>
+      <body className="antialiased text-slate-900 bg-white">
+        {/* <NavBar /> */}
+        {children}
+        {/* <Footer /> */}
+      </body>
     </html>
   );
 }

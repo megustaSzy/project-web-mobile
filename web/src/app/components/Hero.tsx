@@ -14,6 +14,7 @@ export default function Hero() {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 5000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -21,7 +22,7 @@ export default function Hero() {
     <section className="relative w-full h-[90vh] flex flex-col justify-end overflow-visible">
       {/* Background Slider */}
       <div className="absolute inset-0">
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           <motion.div
             key={images[current]}
             initial={{ opacity: 0 }}
@@ -32,9 +33,10 @@ export default function Hero() {
           >
             <Image
               src={images[current]}
-              alt="Hero Background"
+              alt={`Hero Background ${current + 1}`}
               fill
               priority
+              sizes="100vw"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-black/50" />
@@ -75,7 +77,7 @@ export default function Hero() {
           {images.map((_, index) => (
             <span
               key={index}
-              className={`w-3 h-3 rounded-full ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 current === index ? "bg-white" : "bg-white/40"
               }`}
             />

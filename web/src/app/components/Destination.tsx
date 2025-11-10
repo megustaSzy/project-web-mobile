@@ -81,7 +81,7 @@ export default function DestinasiSection() {
                 </div>
 
                 <div className="p-5 text-left">
-                  <h3 className="text-lg font-semibold mb-1">{d.name}</h3>
+                  <h3 className="text-lg font-semibold text-black mb-1">{d.name}</h3>
                   <div className="flex items-center gap-1 text-gray-500 text-sm mb-2">
                     <MapPin size={14} />
                     <span>{d.location}</span>

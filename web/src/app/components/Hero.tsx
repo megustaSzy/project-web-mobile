@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import SearchCard from "./SearchCard"; // pastikan hanya ini, jangan impor 2x
+import SearchCard from "./SearchCard"; 
+import { Calendar, Clock, Users, Search, MapPin } from "lucide-react";
 
 const images = ["/images/hero1.jpg", "/images/hero2.jpg", "/images/hero3.jpg"];
 
@@ -82,7 +83,6 @@ export default function Hero() {
         </div>
       </div>
 
-<<<<<<< HEAD
 {/* Search Box (mengambang di bawah hero) */}
 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full px-4">
   <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6 max-w-6xl mx-auto">
@@ -138,13 +138,10 @@ export default function Hero() {
     </div>
   </div>
 </div>
-
-=======
       {/* Hanya satu SearchCard di sini */}
       <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 w-full px-4 z-20">
         <SearchCard />
       </div>
->>>>>>> c7f6ed0 (merubah tampilan searchcard)
     </section>
   );
 }

@@ -4,6 +4,7 @@ export default function ChooseUs() {
   return (
     <section className="relative bg-gradient-to-b from-[#f8fafc] to-white py-20 overflow-hidden">
               {/* Konten kanan */}
+        <div>
           <h2 className="text-center text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
             Mengapa <span className="text-blue-600">Memilih</span> Kami
           </h2>
@@ -23,15 +24,7 @@ export default function ChooseUs() {
           />
         </div>
 
-        {/* Konten kanan */}
-        <div>
-          <h2 className="text-center md:text-4xl font-extrabold text-gray-900 mb-3">
-            Mengapa <span className="text-blue-600">Memilih</span> Kami
-          </h2>
-          <p className="text-gray-500 mb-10">
-            Layanan profesional, harga bersahabat, dan perjalanan penuh kenangan
-            bersama <span className="font-semibold text-blue-500">LamiGo</span>
-          </p>
+
 
           {/* List Kelebihan */}
           <div className="space-y-4">

@@ -44,36 +44,34 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center text-center text-white px-4 py-28 md:py-40">
-        <div className="flex flex-col items-center gap-1">
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <span className="text-2xl">🏆</span>
-            <p className="text-sm md:text-base opacity-90 font-medium">
-              Best Travel Experience
-            </p>
-          </div>
+     {/* Hero Content */}
+<div className="relative z-10 flex flex-col justify-center items-center text-center text-white px-4 py-28 md:py-40">
+  <div className="flex flex-col items-center gap-1">
+  <div className="relative z-10 flex flex-col justify-center items-center text-center px-4 py-0 md:py-0">
+  <div className="w-24 h-24 md:w-40 md:h-40 relative mb-6 md:mb-0">
+    <Image
+      src="/images/best.png" // ganti path sesuai lokasi file
+      alt="Best Travel Experience"
+      fill
+      className="object-contain"
+    />
+  </div>
+</div>
 
-          <div className="flex justify-center mb-2">
-            {"★★★★★".split("").map((star, i) => (
-              <span key={i} className="text-yellow-400 text-lg">
-                {star}
-              </span>
-            ))}
-          </div>
+
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-5">
           LamiGo Jelajah Alam Lampung
         </h1>
 
-        <p className="max-w-2xl text-sm md:text-base mb-8 opacity-90">
+        <p className="max-w-2xl text-sm md:text-base mb-5 opacity-90">
           Temukan destinasi terbaik, atur perjalanan impianmu, dan pesan tiket
           dengan mudah dalam satu aplikasi lengkap untuk semua kebutuhan
           liburan.
         </p>
 
-        <div className="flex gap-2 mb-10">
+        <div className="flex gap-2 mb-0">
           {images.map((_, index) => (
             <span
               key={index}

@@ -32,14 +32,7 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <Image src="/images/logo.png" alt="LamiGo" width={40} height={40} />
-          <span
-            className={`font-semibold text-lg transition-colors duration-300 ${
-              scrolled ? "text-gray-800" : "text-white"
-            }`}
-          >
-            LamiGo
-          </span>
+          <Image src="/images/logo.png" alt="Logo" width={40} height={40} />
         </div>
 
         {/* Navigation */}

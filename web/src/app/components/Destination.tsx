@@ -37,7 +37,7 @@ const destinations = [
 
 export default function DestinasiSection() {
   const [activeCategory, setActiveCategory] = useState("Pantai");
-
+  const [clickedId, setClickedId] = useState(null);
   return (
     <section className="w-full py-24 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
@@ -45,24 +45,29 @@ export default function DestinasiSection() {
           Tujuan Wisata Favorit
         </h2>
 
-        {/* Kategori Filter */}
-        <div className="flex justify-center flex-wrap gap-3 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2 rounded-full border transition-all ${
-                activeCategory === cat
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-blue-600 border-blue-600 hover:bg-blue-50"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+       {/* Kategori Filter */}
+<div className="flex justify-center flex-wrap gap-3 mb-12">
+  {categories.map((cat) => {
+    const isActive = activeCategory === cat;
+    return (
+      <button
+        key={cat}
+        onClick={() => setActiveCategory(cat)}
+        className={`px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300
+          ${
+            isActive
+              ? "bg-blue-600 border-blue-600 text-white shadow-md scale-105"
+              : "bg-white border-gray-300 text-gray-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50"
+          }`}
+      >
+        {cat}
+      </button>
+    );
+  })}
+</div>
 
-        {/* Daftar Kartu */}
+
+             {/* Daftar Kartu */}
         <div className="grid gap-6 md:grid-cols-3">
           {destinations
             .filter((d) => d.category === activeCategory)
@@ -72,12 +77,7 @@ export default function DestinasiSection() {
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden"
               >
                 <div className="relative w-full h-48">
-                  <Image
-                    src={d.image}
-                    alt={d.name}
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={d.image} alt={d.name} fill className="object-cover" />
                 </div>
 
                 <div className="p-5 text-left">
@@ -89,7 +89,16 @@ export default function DestinasiSection() {
                   <p className="text-gray-600 text-sm mb-4">{d.desc}</p>
 
                   <div className="flex justify-between items-center">
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    <button
+                      onClick={() =>
+                        setClickedId(clickedId === d.id ? null : d.id)
+                      }
+                      className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                        clickedId === d.id
+                          ? "bg-black text-white hover:bg-gray-900 scale-105"
+                          : "bg-blue-600 text-white hover:bg-blue-700"
+                      }`}
+                    >
                       Pesan Sekarang
                     </button>
                     <p className="text-gray-800 font-medium text-sm">
@@ -100,6 +109,7 @@ export default function DestinasiSection() {
               </div>
             ))}
         </div>
+
       </div>
     </section>
   );

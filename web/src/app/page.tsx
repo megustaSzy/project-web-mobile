@@ -1,4 +1,10 @@
 import Image from "next/image";
+import Hero from "./components/Hero";
+import FavoriteDestinations from "./components/FavoriteDestinations";
+import WhyChooseUs from "./components/WhyChooseUs";
+import Testimonials from "./components/Testimonials";
+import StoryForm from "./components/StoryForm";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -59,6 +65,12 @@ export default function Home() {
             Documentation
           </a>
         </div>
+         <Hero />
+      <FavoriteDestinations />
+      <WhyChooseUs />
+      <Testimonials />
+      <StoryForm />
+      <Footer />
       </main>
     </div>
   );

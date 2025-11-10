@@ -1,33 +1,22 @@
-"use client";
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import Image from "next/image";
 
 export default function Hero() {
-  const [search, setSearch] = useState("");
-
   return (
-    <section
-      className="relative w-full h-[90vh] bg-cover bg-center flex flex-col justify-center items-center text-white"
-      style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-    >
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="relative z-10 text-center px-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          LamiGo Jelajah Alam Lampung
-        </h1>
-        <p className="text-lg md:text-xl mb-8">
-          Temukan keindahan destinasi terbaik di Lampung
-        </p>
+    <section className="relative h-[68vh] min-h-[420px] w-full">
+      <div className="absolute inset-0">
+        <Image src="/hero.jpg" alt="Pantai Lampung" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-black/50"></div>
+      </div>
 
-        <div className="flex flex-col md:flex-row gap-3 bg-white rounded-xl p-4 w-full max-w-2xl mx-auto">
-          <Input
-            placeholder="Cari tempat wisata..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="flex-1"
-          />
-          <Button className="bg-primary hover:bg-blue-700">Cari</Button>
+      <div className="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4">
+        <p className="text-sm mb-2">Best Travel Experience</p>
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-3">LamiGo Jelajah Alam Lampung</h1>
+        <p className="max-w-xl text-sm md:text-base mb-8 opacity-90">
+          Temukan destinasi terbaik, atur perjalanan impianmu, dan pesan tiket dengan mudah dalam satu aplikasi lengkap untuk semua kebutuhan liburan.
+        </p>
+        <div className="flex gap-3">
+          <a href="#tours" className="bg-primary text-white py-3 px-6 rounded-full">Jelajahi Sekarang</a>
+          <a href="#about" className="border border-white py-3 px-6 rounded-full">Pelajari Lebih</a>
         </div>
       </div>
     </section>
